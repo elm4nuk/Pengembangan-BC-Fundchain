@@ -4,10 +4,15 @@ import { NestFactory } from '@nestjs/core';
 import type { NestExpressApplication } from '@nestjs/platform-express';
 import { AppModule } from './app.module';
 import { configureApp } from './app.setup';
+import { assertBcLocalEnvironment, BC_LOCAL_MODE } from './common/bc-local-config';
 import { env } from './common/env';
 
 /** Gagal cepat dengan pesan jelas bila apps/api/.env belum dibuat / masih placeholder. */
 function assertDatabaseConfigured() {
+  if (process.env.FUNDCHAIN_ENV === BC_LOCAL_MODE) {
+    assertBcLocalEnvironment(process.env);
+    return;
+  }
   const bad = ['DATABASE_URL', 'DIRECT_URL'].filter((k) => !process.env[k] || process.env[k]!.includes('<'));
   if (bad.length === 0) return;
   console.error(

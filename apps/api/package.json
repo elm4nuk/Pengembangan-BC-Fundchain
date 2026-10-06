@@ -8,6 +8,7 @@
     "start": "node dist/main.js",
     "test": "vitest run",
     "typecheck": "tsc --noEmit",
+    "db:generate": "prisma generate",
     "db:migrate": "prisma migrate dev",
     "db:reset": "prisma migrate reset --force",
     "db:seed": "prisma db seed",
@@ -16,9 +17,6 @@
     "db:deploy": "prisma migrate deploy",
     "db:setup": "prisma migrate deploy && prisma db seed",
     "files:sync": "ts-node --transpile-only scripts/sync-files-to-db.ts"
-  },
-  "prisma": {
-    "seed": "ts-node --transpile-only prisma/seed.ts"
   },
   "dependencies": {
     "@fundchain/shared": "workspace:*",

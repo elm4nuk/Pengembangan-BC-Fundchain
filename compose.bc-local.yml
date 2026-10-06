@@ -1,0 +1,25 @@
+name: fundchain-bc-local
+
+services:
+  postgres:
+    image: postgres:16-alpine
+    container_name: fundchain-bc-local-postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: fundchain_bc_dev
+      POSTGRES_USER: fundchain
+      POSTGRES_PASSWORD: fundchain_bc_local
+    ports:
+      - "127.0.0.1:5433:5432"
+    volumes:
+      - fundchain_bc_local_postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U fundchain -d fundchain_bc_dev"]
+      interval: 5s
+      timeout: 5s
+      retries: 12
+      start_period: 10s
+
+volumes:
+  fundchain_bc_local_postgres_data:
+    name: fundchain_bc_local_postgres_data

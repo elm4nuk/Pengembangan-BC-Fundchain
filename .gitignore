@@ -5,6 +5,8 @@ build/
 .env.local
 .env.*
 !.env.example
+!apps/api/.env.bc-local.example
+apps/api/.env.bc-local
 !apps/web/.env.remote
 .vercel
 apps/api/public/
@@ -22,3 +24,4 @@ apps/api/prisma/*.db-journal
 apps/api/uploads/
 # (folder lama; upload kini hanya di database)
 .claude/launch.json
+graphify-out/

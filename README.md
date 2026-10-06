@@ -18,6 +18,14 @@ Web lokal memakai API production (`fundchain-api.vercel.app`). Cocok untuk menge
 pnpm install
 ```
 
+Command ini juga membangun package `@fundchain/shared` dan membuat Prisma Client dari
+`apps/api/prisma/schema.prisma`. Jika editor masih menampilkan tipe Prisma yang hilang
+setelah berpindah branch atau mengubah schema, jalankan ulang:
+
+```bash
+pnpm prisma:generate
+```
+
 ```bash
 pnpm dev:web:remote
 ```
@@ -29,6 +37,9 @@ Buka http://localhost:5173. Data yang dibuat masuk ke database production.
 1. Salin `apps/api/.env.example` menjadi `apps/api/.env`.
 2. Isi `DATABASE_URL` dan `DIRECT_URL` (minta ke pemilik project, atau pakai project Supabase sendiri — langkah di bawah).
 3. Jalankan `pnpm install`, `pnpm bootstrap`, lalu `pnpm dev`.
+
+`pnpm bootstrap` selalu membuat ulang Prisma Client sebelum menjalankan migration dan
+seed, sehingga tipe generated tetap sinkron dengan schema project.
 
 Kalau `.env` belum diisi, API berhenti dengan pesan yang menjelaskan langkahnya. Gejalanya di web: "Tidak dapat terhubung ke server".
 
