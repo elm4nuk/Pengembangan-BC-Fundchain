@@ -10,6 +10,8 @@
     "deploy:local:wait": "wait-on -t 120000 tcp:127.0.0.1:8545 && hardhat run scripts/deploy.ts --network localhost",
     "deploy:sepolia": "hardhat run scripts/deploy.ts --network sepolia",
     "smoke:sepolia": "hardhat run scripts/smoke.ts --network sepolia",
+    "monitor:relayer": "hardhat run scripts/relayer.ts --network sepolia",
+    "monitor:relayer:local": "hardhat run scripts/relayer.ts --network localhost",
     "typecheck": "tsc --noEmit"
   },
   "devDependencies": {
